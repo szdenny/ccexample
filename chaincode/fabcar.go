@@ -33,8 +33,8 @@ import (
 	"fmt"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
-	"github.com/shijinshi/mfbobc/chaincode/bean"
-	"github.com/shijinshi/mfbobc/chaincode/framework"
+	"github.com/szdenny/ccexample/chaincode/bean"
+	"github.com/szdenny/ccexample/chaincode/framework"
 )
 
 // Define the Smart Contract structure

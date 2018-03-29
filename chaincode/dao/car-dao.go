@@ -3,7 +3,7 @@ package dao
 import (
 	"fmt"
 	"encoding/json"
-	"github.com/shijinshi/mfbobc/chaincode/bean"
+	"github.com/szdenny/ccexample/chaincode/bean"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 
 )

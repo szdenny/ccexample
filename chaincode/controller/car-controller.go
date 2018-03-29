@@ -2,7 +2,7 @@ package controller
 
 import (
 	"fmt"
-	"github.com/shijinshi/mfbobc/chaincode/service"
+	"github.com/szdenny/ccexample/chaincode/service"
 )
 
 type CarController struct {

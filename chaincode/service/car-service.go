@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/shijinshi/mfbobc/chaincode/dao"
-	"github.com/shijinshi/mfbobc/chaincode/bean"
+	"github.com/szdenny/ccexample/chaincode/dao"
+	"github.com/szdenny/ccexample/chaincode/bean"
 )
 
 type CarService interface {

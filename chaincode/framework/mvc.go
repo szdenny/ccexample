@@ -1,10 +1,10 @@
 package framework
 
 import (
-	"github.com/shijinshi/mfbobc/chaincode/service"
-	"github.com/shijinshi/mfbobc/chaincode/dao"
+	"github.com/szdenny/ccexample/chaincode/service"
+	"github.com/szdenny/ccexample/chaincode/dao"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/shijinshi/mfbobc/chaincode/controller"
+	"github.com/szdenny/ccexample/chaincode/controller"
 	"reflect"
 	sc "github.com/hyperledger/fabric/protos/peer"
 )
