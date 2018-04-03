@@ -7,25 +7,34 @@ import (
 	"github.com/szdenny/ccexample/chaincode/controller"
 	"reflect"
 	sc "github.com/hyperledger/fabric/protos/peer"
+	"errors"
+	"fmt"
 )
 
-func BuildService(APIstub shim.ChaincodeStubInterface) service.CarService {
-	carDao := dao.CarDaoImpl{
-		TableName: "CAR",
-		APIstub:   APIstub,
-	}
-	sc := service.CarServiceImpl{
-		Dao: carDao,
-	}
+type TypeRegister map[string]reflect.Type
 
-	return sc
+func (t TypeRegister) Set(beanName string,interfaceName interface{}) {
+	//name string, typ reflect.Type
+	t[beanName] = reflect.TypeOf(interfaceName)
 }
 
-func BuildController(APIstub shim.ChaincodeStubInterface) controller.CarController {
-	return controller.CarController{
-		S: BuildService(APIstub),
+func (t TypeRegister) Get(name string) (interface{}, error) {
+	if typ, ok := t[name]; ok {
+		return reflect.New(typ).Elem().Interface(), nil
+	}
+	return nil, errors.New("no one")
+}
+
+var TypeReg = make(TypeRegister)
+
+func BuildController(APIstub shim.ChaincodeStubInterface) interface{}{
+	controller, error :=  TypeReg.Get("")
+	if error != nil {
+		fmt.Println(error)
+		return nil
 	}
 
+	return controller
 }
 
 func Invoke(APIstub shim.ChaincodeStubInterface) sc.Response{

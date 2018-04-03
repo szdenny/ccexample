@@ -14,11 +14,11 @@ type CarServiceImpl struct {
 	Dao dao.CarDao`mytag:"CarDao"`
 }
 
-func (this CarServiceImpl)CreateCar(car bean.Car)  {
+func (this *CarServiceImpl)CreateCar(car bean.Car)  {
 	this.Dao.Add(car)
 }
 
-func (this CarServiceImpl)ChangeCarOwner(id, newOwner string){
+func (this *CarServiceImpl)ChangeCarOwner(id, newOwner string){
 	car := this.Dao.Inquire(id)
 	car.Owner = newOwner
 	this.Dao.Update(car)
