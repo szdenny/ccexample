@@ -1,18 +1,16 @@
-package dao
+package business
 
 import (
 	"fmt"
 	"encoding/json"
-	"github.com/szdenny/ccexample/chaincode/bean"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-
 	"github.com/szdenny/ccexample/chaincode/framework"
 )
 
 type CarDao interface {
-	Add(car bean.Car)
-	Inquire(id string) bean.Car
-	Update(car bean.Car)
+	Add(car Car)
+	Inquire(id string) Car
+	Update(car Car)
 }
 
 type CarDaoImpl struct {
@@ -20,25 +18,25 @@ type CarDaoImpl struct {
 	TableName string
 }
 
-func (this *CarDaoImpl)Add(car bean.Car){
+func (this *CarDaoImpl)Add(car Car){
 	carAsBytes, _ := json.Marshal(car)
 	this.APIstub.PutState(this.TableName+car.ID, carAsBytes)
 	fmt.Println("Dao.Add called")
 }
 
-func (this *CarDaoImpl)Inquire(id string) bean.Car{
+func (this *CarDaoImpl)Inquire(id string) Car{
 	carAsBytes, _ := this.APIstub.GetState(this.TableName+id)
-	car := bean.Car{}
+	car := Car{}
 
 	json.Unmarshal(carAsBytes, &car)
 	return car
 }
 
-func (this *CarDaoImpl)Update(car bean.Car){
+func (this *CarDaoImpl)Update(car Car){
 	carAsBytes, _ := json.Marshal(car)
 	this.APIstub.PutState(car.ID, carAsBytes)
 }
 
 func init(){
-	framework.TypeReg.Set(new(CarDaoImpl))
+	framework.TypeReg.Set("carDao", &CarDaoImpl{})
 }

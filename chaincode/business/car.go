@@ -1,4 +1,4 @@
-package bean
+package business
 
 // Define the car structure, with 4 properties.  Structure tags are used by encoding/json library
 type Car struct {
