@@ -3,17 +3,18 @@ package business
 import (
 	"fmt"
 	"github.com/szdenny/ccexample/chaincode/framework"
+	"reflect"
 )
 
 type CarController struct {
-	S CarService `bean:"carService"`
+	S CarServiceImpl `bean:"carService"`
 }
 
 func (this *CarController) ChangeOwner(args []string) {
+	fmt.Printf("%s %s\n", args[0], args[0])
 	this.S.ChangeCarOwner(args[0], args[1])
-	fmt.Println("i am here")
 }
 
 func init(){
-	framework.TypeReg.Set("carControl", &CarController{})
+	framework.TypeReg.Set("Car", reflect.TypeOf(CarController{}))
 }

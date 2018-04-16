@@ -1,6 +1,9 @@
 package business
 
-import "github.com/szdenny/ccexample/chaincode/framework"
+import (
+	"github.com/szdenny/ccexample/chaincode/framework"
+	"reflect"
+)
 
 type CarService interface {
 	CreateCar(car Car)
@@ -8,7 +11,7 @@ type CarService interface {
 }
 
 type CarServiceImpl struct {
-	Dao CarDao `bean:"carDao"`
+	Dao CarDaoImpl `bean:"carDao"`
 }
 
 func (this *CarServiceImpl) CreateCar(car Car) {
@@ -22,5 +25,5 @@ func (this *CarServiceImpl) ChangeCarOwner(id, newOwner string) {
 }
 
 func init() {
-	framework.TypeReg.Set("carService", &CarServiceImpl{})
+	framework.TypeReg.Set("carService", reflect.TypeOf(CarServiceImpl{}))
 }

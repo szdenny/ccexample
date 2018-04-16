@@ -3,8 +3,9 @@ package business
 import (
 	"fmt"
 	"encoding/json"
-	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/szdenny/ccexample/chaincode/framework"
+	"reflect"
+	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
 type CarDao interface {
@@ -14,8 +15,8 @@ type CarDao interface {
 }
 
 type CarDaoImpl struct {
-	APIstub shim.ChaincodeStubInterface
-	TableName string
+	APIstub shim.ChaincodeStubInterface `stub:"stub"`
+	TableName string `value:"Car"`
 }
 
 func (this *CarDaoImpl)Add(car Car){
@@ -38,5 +39,5 @@ func (this *CarDaoImpl)Update(car Car){
 }
 
 func init(){
-	framework.TypeReg.Set("carDao", &CarDaoImpl{})
+	framework.TypeReg.Set("carDao", reflect.TypeOf(CarDaoImpl{}))
 }

@@ -68,7 +68,6 @@ func (s *SmartContract) queryCar(APIstub shim.ChaincodeStubInterface, args []str
 
 
 func main() {
-	framework.BuildController(nil)
 	//Create a new Smart Contract
 	err := shim.Start(new(SmartContract))
 	if err != nil {
